@@ -56,6 +56,9 @@ class User(object):
         if not Utils.email_is_valid(email):
             raise UserErrors.InvalidEmailError("The e-mail does not have the right format.")
 
+        if password == "":
+            raise UserErrors.PasswordCannotLeftBlank("Password cannot left blank")
+
         User(email, Utils.hash_password(password)).save_to_db()
 
         return True
